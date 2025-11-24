@@ -3,13 +3,16 @@ import axios from 'axios';
 // Production backend URL on Render
 const API_URL = process.env.REACT_APP_API_URL || 'https://ridehub-backend-mpmk.onrender.com/api';
 
-console.log('API Base URL:', API_URL); // Debug log
+// Log for debugging
+console.log('Environment:', process.env.NODE_ENV);
+console.log('API Base URL:', API_URL);
 
 const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 30000, // 30 second timeout
 });
 
 // Add auth token to requests
