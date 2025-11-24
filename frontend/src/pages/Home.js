@@ -186,13 +186,13 @@ const Home = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                 <div className="md:col-span-5 relative">
-                  <FaMapMarkerAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-luxury-gold" />
+                  <FaMapMarkerAlt className="absolute left-5 top-1/2 transform -translate-y-1/2 text-luxury-gold text-sm" />
                   <input
                     type="text"
                     placeholder="Enter city"
                     value={searchData.city}
                     onChange={(e) => setSearchData({ ...searchData, city: e.target.value })}
-                    className="w-full pl-14 pr-4 py-4 bg-luxury-dark border border-luxury-charcoal/50 rounded-2xl focus:ring-2 focus:ring-luxury-gold focus:border-transparent text-white placeholder-gray-500 transition-all"
+                    className="w-full pl-12 pr-4 py-4 bg-luxury-dark border border-luxury-charcoal/50 rounded-2xl focus:ring-2 focus:ring-luxury-gold focus:border-transparent text-white placeholder-gray-500 transition-all"
                   />
                 </div>
 
