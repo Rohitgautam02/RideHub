@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Replace with your actual Render backend URL
-const API_URL = process.env.REACT_APP_API_URL || 'https://ridehub-backend-mpmk.onrender.com';
+const API_URL = process.env.REACT_APP_API_URL || 'https://ridehub-backend-mpmk.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_URL,
