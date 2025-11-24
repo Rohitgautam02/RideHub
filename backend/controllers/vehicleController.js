@@ -204,11 +204,16 @@ exports.updateVehicle = async (req, res) => {
     const imagesToDelete = oldImages.filter(img => !finalImages.includes(img));
     
     imagesToDelete.forEach(imagePath => {
-      const filename = imagePath.replace('/uploads/', '');
-      const fullPath = path.join(__dirname, '..', 'uploads', filename);
-      
-      if (fs.existsSync(fullPath)) {
-        fs.unlinkSync(fullPath);
+      try {
+        const filename = imagePath.replace('/uploads/', '');
+        const fullPath = path.join(__dirname, '..', 'uploads', filename);
+        
+        if (fs.existsSync(fullPath)) {
+          fs.unlinkSync(fullPath);
+        }
+      } catch (error) {
+        console.error(`Failed to delete image: ${imagePath}`, error);
+        // Continue even if delete fails
       }
     });
     
