@@ -1,223 +1,543 @@
-# 🚗 RideHub - Vehicle Rental Platform
+# 🚗 RideHub - Premium Indian Vehicle Rental Platform
 
-A modern, full-stack vehicle rental platform built with MERN stack, featuring a luxury-themed UI and complete booking management system.
+A complete, production-ready full-stack **luxury vehicle rental platform** built with React, Node.js, Express, MongoDB, and Tailwind CSS. Features a **premium dark theme with gold accents**, inspired by BigBoyToyz and BMW.
 
-![RideHub Banner](https://img.shields.io/badge/RideHub-Vehicle%20Rental-gold?style=for-the-badge)
+## 🎨 NEW: Luxury Redesign
+
+**RideHub now features a premium luxury design:**
+- ✨ **Dark Theme:** Black backgrounds with gold accents
+- 🎭 **Smooth Animations:** Framer Motion throughout
+- 📱 **Glass-morphism UI:** Modern transparent effects
+- ⚡ **Sticky Navigation:** Transparent to solid on scroll
+- 🎯 **Premium Typography:** Montserrat + Inter fonts
+- 🃏 **Curved Cards:** Luxury vehicle showcases
+- 📊 **Animated Counters:** 7600+ customers, 500+ vehicles
+- 🏪 **Showroom Section:** Mumbai, Delhi, Bangalore
+- 📱 **App Download:** Google Play + App Store buttons
+
+**Design Inspiration:** BigBoyToyz + BMW
 
 ## ✨ Features
 
-### 👥 User Roles
-- **Customers** - Browse, search, and book vehicles with integrated payment
-- **Shop Owners** - Manage vehicles, bookings, and track revenue
-- **Admin** - Complete platform management and oversight
+### Customer Features
+- 🔐 Sign up & login with JWT authentication
+- 🔍 Browse scooters, bikes, and cars by city, type, price, and category
+- 📍 Find nearby rental shops using geolocation
+- 📅 Book vehicles for specific date ranges
+- 💳 Pay online (Stripe or mock payment)
+- 📊 View booking history and payment records
+- ❌ Cancel bookings
 
-### 🔥 Core Features
-- 🔐 Secure JWT authentication with role-based access
-- 🔍 Advanced search and filtering (type, price, city, fuel type, transmission)
-- 📸 Multi-image upload with camera capture support
-- 💳 Razorpay payment integration (mock mode for testing)
-- 📱 Fully responsive luxury-themed design
-- 📊 Real-time dashboard analytics for all user types
-- 🗺️ Location-based vehicle discovery
-- 📅 Booking management with status tracking
-- 🖼️ Image carousel for vehicle galleries
-- ♻️ Cascade deletion for data integrity
+### Shop Owner Features
+- 🏪 Register as shop owner with shop details
+- 🚗 Add/edit/delete vehicles with multiple photos
+- 💰 Set custom daily and hourly rental rates
+- 📋 Manage bookings for their shop
+- 🛣️ Record start & end odometer readings
+- 📊 View shop statistics (revenue, bookings, distance)
+- 👥 Track customers and booking history
+
+### Admin Features (Optional)
+- 👨‍💼 Manage users, shops, vehicles, and bookings
 
 ## 🛠️ Tech Stack
 
-**Frontend:**
-- React 18 with React Router v6
-- Tailwind CSS for styling
-- Axios for API calls
-- React Toastify for notifications
-- React Icons
+### Backend
+- **Node.js** + **Express** - REST API server
+- **MongoDB** + **Mongoose** - Database with geospatial queries
+- **JWT** - Authentication
+- **Multer** - Image uploads
+- **Stripe** - Payment integration (optional)
+- **bcrypt** - Password hashing
 
-**Backend:**
-- Node.js & Express.js
-- MongoDB with Mongoose ODM
-- JWT for authentication
-- Multer for file uploads
-- Razorpay for payments
-- Bcrypt for password hashing
+### Frontend
+- **React 18** - UI library
+- **React Router** - Client-side routing
+- **Tailwind CSS** - Modern styling
+- **Axios** - HTTP client
+- **React Toastify** - Notifications
+- **React Icons** - Icon library
+- **date-fns** - Date formatting
 
-## 🚀 Quick Start
+## 📦 Installation & Setup
 
 ### Prerequisites
 - Node.js (v14 or higher)
-- MongoDB Atlas account
-- Git
+- MongoDB (local or Atlas)
+- npm or yarn
 
-### Installation
+### Backend Setup
 
-1. **Clone the repository**
-```bash
-git clone https://github.com/Rohitgautam02/RideHub.git
-cd RideHub
-```
-
-2. **Backend Setup**
+1. **Navigate to backend directory:**
 ```bash
 cd backend
+```
+
+2. **Install dependencies:**
+```bash
 npm install
 ```
 
-Create `.env` file in backend directory:
+3. **Create environment file:**
+Create a `.env` file in the backend directory:
+```bash
+cp .env.example .env
+```
+
+4. **Configure environment variables:**
+Edit `.env` file:
 ```env
+# Server
 PORT=5000
 NODE_ENV=development
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key_min_32_chars
+
+# Database
+MONGO_URI=mongodb://localhost:27017/ridehub
+
+# JWT
+JWT_SECRET=your_super_secret_jwt_key_change_this
 JWT_EXPIRE=30d
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_secret
+
+# Cloudinary (optional - for production image uploads)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Stripe (optional - for real payments)
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
+
+# Payment Mode (stripe or mock)
 PAYMENT_MODE=mock
 ```
 
-Start backend server:
+5. **Start MongoDB:**
 ```bash
-npm start
+# If using local MongoDB
+mongod
 ```
 
-3. **Frontend Setup**
+6. **Seed the database:**
 ```bash
-cd ../frontend
+npm run seed
+```
+
+This will create:
+- 6 users (admin, 3 shop owners, 2 customers)
+- 3 shops (Mumbai, Delhi, Bangalore)
+- 15+ vehicles (scooters, bikes, cars)
+
+**Demo Login Credentials:**
+- **Admin:** admin@ridehub.com / admin123
+- **Shop Owner 1:** rajesh@shop.com / shop123
+- **Shop Owner 2:** priya@shop.com / shop123
+- **Shop Owner 3:** amit@shop.com / shop123
+- **Customer 1:** john@customer.com / customer123
+- **Customer 2:** sarah@customer.com / customer123
+
+7. **Start the backend server:**
+```bash
+npm run dev
+```
+
+Backend will run on `http://localhost:5000`
+
+### Frontend Setup
+
+1. **Open a new terminal and navigate to frontend directory:**
+```bash
+cd frontend
+```
+
+2. **Install dependencies:**
+```bash
 npm install
+```
+
+3. **Create environment file:**
+Create a `.env` file in the frontend directory:
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+```
+
+4. **Start the development server:**
+```bash
 npm start
 ```
 
-The application will open at `http://localhost:3000`
+Frontend will open at `http://localhost:3000`
 
-## 📁 Project Structure
+## 🎯 Usage Guide
 
-```
-RideHub/
-├── backend/
-│   ├── controllers/     # Route controllers
-│   ├── models/          # MongoDB models
-│   ├── routes/          # API routes
-│   ├── middleware/      # Auth & upload middleware
-│   ├── uploads/         # Uploaded images
-│   └── server.js        # Entry point
-├── frontend/
-│   ├── public/
-│   └── src/
-│       ├── components/  # Reusable components
-│       ├── context/     # React context
-│       ├── pages/       # Page components
-│       ├── services/    # API services
-│       └── utils/       # Helper functions
-└── README.md
-```
+### For Customers
 
-## 🎨 Key Features Breakdown
+1. **Sign Up / Login:**
+   - Go to Register page
+   - Select "Customer" role
+   - Fill in your details
+   - Login with credentials
 
-### Authentication & Authorization
-- JWT-based secure authentication
-- Role-based access control (Customer, Shop Owner, Admin)
-- Protected routes and API endpoints
+2. **Browse Vehicles:**
+   - Use the homepage search
+   - Filter by type, city, price range
+   - View vehicle details with image carousel
 
-### Vehicle Management
-- CRUD operations for vehicles
-- Multi-image upload with preview
-- Camera capture for mobile devices
-- Image carousel display
-- Automatic image cleanup on deletion
+3. **Book a Vehicle:**
+   - Select dates and rental type (daily/hourly)
+   - Review total amount
+   - Click "Book Now"
+   - Complete payment
 
-### Booking System
-- Date-based availability checking
-- Real-time booking status updates
-- Payment integration with Razorpay
-- Booking history and management
+4. **Manage Bookings:**
+   - View all bookings in dashboard
+   - Track booking status
+   - Cancel if needed
 
-### Search & Filters
-- Filter by vehicle type, price range, city
-- Filter by transmission and fuel type
-- Real-time search results
+### For Shop Owners
 
-### Dashboard Analytics
-- Customer: Booking history, active bookings
-- Shop Owner: Revenue tracking, vehicle stats, booking management
-- Admin: Platform-wide statistics and user management
+1. **Register Your Shop:**
+   - Select "Shop Owner" during registration
+   - Provide shop details including:
+     - Shop name and address
+     - City and pincode
+     - GPS coordinates (latitude/longitude)
 
-## 🔐 Default Test Accounts
+2. **Add Vehicles:**
+   - Go to Shop Dashboard
+   - Click "Add Vehicle"
+   - Fill vehicle details:
+     - Name, brand, type
+     - Engine capacity (CC)
+     - Transmission, fuel type
+     - Daily and hourly rates
+     - Upload multiple images
+     - Add features
 
-Run seeder to create test accounts:
-```bash
-cd backend
-node seeder.js
-```
+3. **Manage Bookings:**
+   - View all bookings for your shop
+   - Update booking status
+   - Record odometer readings:
+     - Start reading at pickup
+     - End reading at return
+   - System auto-calculates distance traveled
 
-**Admin:**
-- Email: admin@ridehub.com
-- Password: admin123
-
-**Shop Owner:**
-- Email: rajesh@shop.com
-- Password: shop123
-
-**Customer:**
-- Email: john@customer.com
-- Password: customer123
-
-## 💳 Payment Setup
-
-The app uses Razorpay for payments. By default, it runs in **mock mode** for testing.
-
-To enable real payments:
-1. Sign up at [Razorpay Dashboard](https://dashboard.razorpay.com/)
-2. Get your API keys
-3. Update `backend/.env`:
-```env
-RAZORPAY_KEY_ID=your_actual_key_id
-RAZORPAY_KEY_SECRET=your_actual_secret
-PAYMENT_MODE=razorpay
-```
+4. **View Analytics:**
+   - Total bookings and revenue
+   - Vehicle utilization
+   - Distance statistics
 
 ## 🌐 API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user
+```
+POST   /api/auth/register       - Register new user
+POST   /api/auth/login          - Login
+GET    /api/auth/me             - Get current user
+PUT    /api/auth/updatedetails  - Update profile
+PUT    /api/auth/updatepassword - Change password
+```
+
+### Shops
+```
+GET    /api/shops               - Get all shops (with filters)
+GET    /api/shops/:id           - Get single shop
+POST   /api/shops               - Create shop (shop_owner)
+PUT    /api/shops/:id           - Update shop (shop_owner)
+DELETE /api/shops/:id           - Delete shop (shop_owner)
+GET    /api/shops/me/myshop     - Get my shop (shop_owner)
+```
 
 ### Vehicles
-- `GET /api/vehicles` - Get all vehicles
-- `GET /api/vehicles/:id` - Get single vehicle
-- `POST /api/vehicles` - Create vehicle (Auth: Shop Owner)
-- `PUT /api/vehicles/:id` - Update vehicle (Auth: Shop Owner)
-- `DELETE /api/vehicles/:id` - Delete vehicle (Auth: Shop Owner)
+```
+GET    /api/vehicles                      - Get all vehicles
+GET    /api/vehicles/:id                  - Get single vehicle
+POST   /api/vehicles                      - Create vehicle (shop_owner)
+PUT    /api/vehicles/:id                  - Update vehicle (shop_owner)
+DELETE /api/vehicles/:id                  - Delete vehicle (shop_owner)
+GET    /api/vehicles/shop/myvehicles      - Get my shop vehicles
+POST   /api/vehicles/:id/check-availability - Check availability
+```
 
 ### Bookings
-- `GET /api/bookings` - Get user bookings
-- `POST /api/bookings` - Create booking
-- `PUT /api/bookings/:id` - Update booking status
-- `DELETE /api/bookings/:id` - Cancel booking
+```
+POST   /api/bookings                 - Create booking (customer)
+GET    /api/bookings/my              - Get my bookings (customer)
+GET    /api/bookings/shop            - Get shop bookings (shop_owner)
+GET    /api/bookings/:id             - Get single booking
+PUT    /api/bookings/:id/status      - Update status (shop_owner)
+PUT    /api/bookings/:id/record-odo  - Record odometer (shop_owner)
+PUT    /api/bookings/:id/cancel      - Cancel booking (customer)
+GET    /api/bookings/shop/stats      - Get shop stats (shop_owner)
+```
 
 ### Payments
-- `POST /api/payments/create` - Create payment order
-- `POST /api/payments/verify` - Verify payment
+```
+POST   /api/payments/create          - Create payment
+POST   /api/payments/confirm         - Confirm payment
+GET    /api/payments/my              - Get my payments
+GET    /api/payments/booking/:id     - Get payment by booking
+GET    /api/payments/:id             - Get payment details
+```
+
+## 🎨 Key Features Implemented
+
+### 1. **Dynamic Image Carousels**
+- Auto-sliding image galleries
+- Smooth transitions with fade effects
+- Dot indicators and navigation arrows
+- Mobile responsive
+
+### 2. **Geospatial Search**
+- MongoDB 2dsphere index
+- Find shops within radius
+- Latitude/longitude support
+
+### 3. **Smart Booking System**
+- Prevents overlapping bookings
+- Calculates rental duration
+- Supports hourly and daily rates
+- Date validation
+
+### 4. **Odometer Tracking**
+- Record start/end readings
+- Auto-calculate distance
+- Update vehicle total km
+- Track per-booking usage
+
+### 5. **Payment Integration**
+- Mock payment mode (default)
+- Stripe integration ready
+- Payment status tracking
+- Booking confirmation on payment
+
+### 6. **Responsive Design**
+- Mobile-first approach
+- Tailwind CSS utilities
+- Smooth animations
+- Loading states
+
+## 🔧 Configuration Options
+
+### Switch Payment Mode
+
+**Mock Payment (Default):**
+```env
+PAYMENT_MODE=mock
+```
+- Instant payment success
+- No external dependencies
+- Perfect for development
+
+**Stripe Payment:**
+```env
+PAYMENT_MODE=stripe
+STRIPE_SECRET_KEY=sk_test_your_key
+STRIPE_PUBLISHABLE_KEY=pk_test_your_key
+```
+- Real payment processing
+- Test mode available
+- Requires Stripe account
+
+### Image Uploads
+
+**Local Storage (Default):**
+- Images stored in `backend/uploads/`
+- Served via Express static middleware
+
+**Cloudinary (Recommended for Production):**
+```env
+CLOUDINARY_CLOUD_NAME=your_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_API_SECRET=your_secret
+```
+
+### Custom Pricing
+
+Shop owners can set:
+- **Daily rates** - Per 24-hour period
+- **Hourly rates** - For short rentals
+- **Both** - Customers choose preference
+
+## 📱 Screenshots & Features
+
+### Customer Journey
+1. **Homepage** - Hero section with search
+2. **Vehicle Listing** - Grid with filters
+3. **Vehicle Detail** - Full specs + booking form
+4. **Dashboard** - Track all bookings
+5. **Payment** - Secure checkout
+
+### Shop Owner Journey
+1. **Registration** - With shop details
+2. **Dashboard** - Stats & overview
+3. **Add Vehicle** - Multi-image upload
+4. **Manage Bookings** - Status updates
+5. **Odometer Entry** - Track usage
+
+## 🚀 Deployment
+
+### Backend (Heroku/Railway/Render)
+1. Push code to Git
+2. Set environment variables
+3. Connect MongoDB Atlas
+4. Deploy
+
+### Frontend (Vercel/Netlify)
+1. Build: `npm run build`
+2. Set REACT_APP_API_URL to production backend
+3. Deploy build folder
+
+### Database (MongoDB Atlas)
+1. Create cluster
+2. Whitelist IPs
+3. Update MONGO_URI in backend
+
+## 🧪 Testing
+
+### Test User Accounts
+```
+Admin:        admin@ridehub.com / admin123
+Shop Owner:   rajesh@shop.com / shop123
+Customer:     john@customer.com / customer123
+```
+
+### Test Workflow
+1. Login as customer
+2. Browse vehicles in Mumbai
+3. Book a vehicle
+4. Complete mock payment
+5. Login as shop owner (rajesh@shop.com)
+6. View booking in dashboard
+7. Update booking status
+8. Record odometer readings
+
+## 🐛 Troubleshooting
+
+### MongoDB Connection Error
+```bash
+# Check if MongoDB is running
+mongo --version
+mongod
+
+# Or use MongoDB Atlas connection string
+MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/ridehub
+```
+
+### Port Already in Use
+```bash
+# Change port in .env
+PORT=5001
+```
+
+### CORS Issues
+- Ensure backend CORS is enabled
+- Check API_URL in frontend .env
+- Verify ports match
+
+### Seeder Issues
+```bash
+# Clear and reseed database
+npm run seed -- -d  # Delete data
+npm run seed        # Import fresh data
+```
+
+## 📚 Project Structure
+
+```
+ridehub/
+├── backend/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── shopController.js
+│   │   ├── vehicleController.js
+│   │   ├── bookingController.js
+│   │   └── paymentController.js
+│   ├── middleware/
+│   │   ├── auth.js
+│   │   ├── error.js
+│   │   └── upload.js
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Shop.js
+│   │   ├── Vehicle.js
+│   │   ├── Booking.js
+│   │   └── Payment.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── shopRoutes.js
+│   │   ├── vehicleRoutes.js
+│   │   ├── bookingRoutes.js
+│   │   └── paymentRoutes.js
+│   ├── .env
+│   ├── package.json
+│   ├── seeder.js
+│   └── server.js
+│
+└── frontend/
+    ├── public/
+    ├── src/
+    │   ├── components/
+    │   │   ├── Navbar.js
+    │   │   ├── Footer.js
+    │   │   ├── ImageCarousel.js
+    │   │   ├── Loading.js
+    │   │   └── PrivateRoute.js
+    │   ├── context/
+    │   │   └── AuthContext.js
+    │   ├── pages/
+    │   │   ├── Home.js
+    │   │   ├── Login.js
+    │   │   ├── Register.js
+    │   │   ├── VehicleList.js
+    │   │   ├── VehicleDetail.js
+    │   │   ├── customer/
+    │   │   │   └── CustomerDashboard.js
+    │   │   └── shop/
+    │   │       └── ShopOwnerDashboard.js
+    │   ├── services/
+    │   │   └── api.service.js
+    │   ├── utils/
+    │   │   └── api.js
+    │   ├── App.js
+    │   ├── index.css
+    │   └── index.js
+    ├── .env
+    ├── package.json
+    └── tailwind.config.js
+```
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📝 License
+## 📄 License
 
-This project is licensed under the MIT License.
+This project is open source and available under the MIT License.
 
-## 👤 Author
+## 👨‍💻 Developer
 
-Rohit Gautam
-- GitHub: [@Rohitgautam02](https://github.com/Rohitgautam02)
-- Repository: [RideHub](https://github.com/Rohitgautam02/RideHub)
+Built with ❤️ for the Indian vehicle rental market.
 
-## 🙏 Acknowledgments
+## 🎉 Features Summary
 
-- Vehicle images from sample data
-- Tailwind CSS for styling
-- MongoDB Atlas for database hosting
-- Razorpay for payment processing
+✅ Multi-role authentication (Customer, Shop Owner, Admin)  
+✅ Shop registration with geolocation  
+✅ Vehicle CRUD with image uploads  
+✅ Advanced search and filters  
+✅ Real-time booking validation  
+✅ Hourly and daily rental options  
+✅ Odometer tracking system  
+✅ Payment integration (Mock/Stripe)  
+✅ Responsive UI with Tailwind CSS  
+✅ Dynamic image carousels  
+✅ Toast notifications  
+✅ Loading states  
+✅ Error handling  
+✅ Database seeder  
+✅ Production-ready architecture  
 
 ---
 
-⭐ Star this repo if you find it helpful!
+**Happy Renting! 🚗🏍️🛵**
