@@ -51,7 +51,7 @@ A modern, full-stack vehicle rental platform built with MERN stack, featuring a 
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/RideHub.git
+git clone https://github.com/Rohitgautam02/RideHub.git
 cd RideHub
 ```
 
@@ -207,9 +207,9 @@ This project is licensed under the MIT License.
 
 ## 👤 Author
 
-Your Name
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
+Rohit Gautam
+- GitHub: [@Rohitgautam02](https://github.com/Rohitgautam02)
+- Repository: [RideHub](https://github.com/Rohitgautam02/RideHub)
 
 ## 🙏 Acknowledgments
 
