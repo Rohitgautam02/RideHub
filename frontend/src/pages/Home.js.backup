@@ -1,0 +1,235 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { vehicleService, shopService } from '../services/api.service';
+import ImageCarousel from '../components/ImageCarousel';
+import Loading from '../components/Loading';
+import { FaMotorcycle, FaCar, FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
+
+const Home = () => {
+  const [featuredVehicles, setFeaturedVehicles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchData, setSearchData] = useState({
+    city: '',
+    type: '',
+  });
+
+  useEffect(() => {
+    loadFeaturedVehicles();
+  }, []);
+
+  const loadFeaturedVehicles = async () => {
+    try {
+      const response = await vehicleService.getVehicles({ available: true });
+      setFeaturedVehicles(response.data.slice(0, 6));
+    } catch (error) {
+      console.error('Error loading vehicles:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = () => {
+    const queryParams = new URLSearchParams();
+    if (searchData.city) queryParams.append('city', searchData.city);
+    if (searchData.type) queryParams.append('type', searchData.type);
+    window.location.href = `/vehicles?${queryParams.toString()}`;
+  };
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center animate-fade-in">
+            <h1 className="text-5xl font-bold mb-6">
+              Rent Your Perfect Ride
+            </h1>
+            <p className="text-xl mb-8 text-primary-100">
+              Choose from scooters, bikes, and cars across India
+            </p>
+
+            {/* Search Box */}
+            <div className="bg-white rounded-2xl shadow-2xl p-6 text-gray-800">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="relative">
+                  <FaMapMarkerAlt className="absolute left-3 top-4 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Enter city"
+                    value={searchData.city}
+                    onChange={(e) => setSearchData({ ...searchData, city: e.target.value })}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  />
+                </div>
+
+                <select
+                  value={searchData.type}
+                  onChange={(e) => setSearchData({ ...searchData, type: e.target.value })}
+                  className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                >
+                  <option value="">All Types</option>
+                  <option value="scooter">Scooters</option>
+                  <option value="bike">Bikes</option>
+                  <option value="car">Cars</option>
+                </select>
+
+                <button
+                  onClick={handleSearch}
+                  className="bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition flex items-center justify-center"
+                >
+                  <FaSearch className="mr-2" />
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Vehicle Categories */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Browse by Category</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Link
+              to="/vehicles?type=scooter"
+              className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transform hover:-translate-y-2 transition-all"
+            >
+              <div className="text-6xl mb-4">🛵</div>
+              <h3 className="text-2xl font-bold mb-2">Scooters</h3>
+              <p className="text-gray-600 mb-4">Perfect for city rides</p>
+              <span className="text-primary-600 font-semibold">From ₹430/day</span>
+            </Link>
+
+            <Link
+              to="/vehicles?type=bike"
+              className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transform hover:-translate-y-2 transition-all"
+            >
+              <div className="text-6xl mb-4">🏍️</div>
+              <h3 className="text-2xl font-bold mb-2">Bikes</h3>
+              <p className="text-gray-600 mb-4">Adventure awaits</p>
+              <span className="text-primary-600 font-semibold">From ₹800/day</span>
+            </Link>
+
+            <Link
+              to="/vehicles?type=car"
+              className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transform hover:-translate-y-2 transition-all"
+            >
+              <div className="text-6xl mb-4">🚗</div>
+              <h3 className="text-2xl font-bold mb-2">Cars</h3>
+              <p className="text-gray-600 mb-4">Comfortable journeys</p>
+              <span className="text-primary-600 font-semibold">From ₹1800/day</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Vehicles */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Featured Vehicles</h2>
+          
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredVehicles.map((vehicle) => (
+                <Link
+                  key={vehicle._id}
+                  to={`/vehicles/${vehicle._id}`}
+                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-1"
+                >
+                  <div className="h-56">
+                    <ImageCarousel images={vehicle.images} />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-xl font-bold">{vehicle.name}</h3>
+                      <span className="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm font-semibold">
+                        {vehicle.type}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-sm mb-4">{vehicle.brand}</p>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <span className="text-2xl font-bold text-primary-600">
+                          ₹{vehicle.dailyRentInINR}
+                        </span>
+                        <span className="text-gray-600 text-sm">/day</span>
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        <FaMapMarkerAlt className="inline mr-1" />
+                        {vehicle.shop?.city}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          <div className="text-center mt-12">
+            <Link
+              to="/vehicles"
+              className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition"
+            >
+              View All Vehicles
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Why Choose RideHub?</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="text-5xl mb-4">✅</div>
+              <h3 className="text-xl font-bold mb-2">Verified Vehicles</h3>
+              <p className="text-gray-600">All vehicles are verified and well-maintained</p>
+            </div>
+
+            <div className="text-center">
+              <div className="text-5xl mb-4">💰</div>
+              <h3 className="text-xl font-bold mb-2">Best Prices</h3>
+              <p className="text-gray-600">Competitive pricing across all categories</p>
+            </div>
+
+            <div className="text-center">
+              <div className="text-5xl mb-4">🔒</div>
+              <h3 className="text-xl font-bold mb-2">Secure Booking</h3>
+              <p className="text-gray-600">Safe and secure payment options</p>
+            </div>
+
+            <div className="text-center">
+              <div className="text-5xl mb-4">📞</div>
+              <h3 className="text-xl font-bold mb-2">24/7 Support</h3>
+              <p className="text-gray-600">Round-the-clock customer assistance</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA for Shop Owners */}
+      <section className="py-16 bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-6">Own a Rental Business?</h2>
+          <p className="text-xl mb-8 text-primary-100">
+            List your vehicles on RideHub and reach thousands of customers
+          </p>
+          <Link
+            to="/register"
+            className="inline-block bg-white text-primary-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-50 transition"
+          >
+            Become a Partner
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home;

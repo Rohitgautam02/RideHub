@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-luxury-black text-gray-100 font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+}
+
+@layer components {
+  .glass-morphism {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+
+  .btn-luxury {
+    @apply bg-gradient-gold text-luxury-black font-semibold px-8 py-3 rounded-full 
+    hover:shadow-lg hover:scale-105 transition-all duration-300 inline-flex items-center gap-2;
+  }
+
+  .btn-luxury-outline {
+    @apply border-2 border-luxury-gold text-luxury-gold font-semibold px-8 py-3 rounded-full 
+    hover:bg-luxury-gold hover:text-luxury-black transition-all duration-300 inline-flex items-center gap-2;
+  }
+
+  .card-luxury {
+    @apply bg-luxury-dark rounded-3xl overflow-hidden border border-luxury-charcoal/30 
+    hover:border-luxury-gold/50 transition-all duration-300 hover:shadow-2xl hover:shadow-luxury-gold/10;
+  }
+
+  .section-heading {
+    @apply text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4;
+  }
+
+  .section-subheading {
+    @apply text-lg md:text-xl text-gray-400 font-body;
+  }
+
+  /* Form inputs - HIGH CONTRAST for visibility */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="time"],
+  textarea,
+  select {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    border: 2px solid #36454f !important;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none !important;
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2) !important;
+    background-color: #0d0d0d !important;
+    color: #ffffff !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af !important;
+    opacity: 0.7;
+    font-weight: 400;
+  }
+
+  /* Autofill styling - Prevent white background */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset !important;
+    box-shadow: 0 0 0px 1000px #1a1a1a inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    border: 2px solid #36454f !important;
+  }
+
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #0d0d0d inset !important;
+    box-shadow: 0 0 0px 1000px #0d0d0d inset !important;
+    border-color: #d4af37 !important;
+  }
+
+  /* Label styling */
+  label {
+    color: #e5e7eb !important;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+}
+
+/* Custom scrollbar - luxury theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f4d03f;
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(to right, #f0f0f0 0%, #e0e0e0 20%, #f0f0f0 40%, #f0f0f0 100%);
+  background-size: 1000px 100%;
+}
