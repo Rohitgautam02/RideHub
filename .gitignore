@@ -39,3 +39,7 @@ coverage/
 
 # Misc
 .cache/
+
+# Internal documentation (keep local only)
+GITHUB_SETUP.md
+PROJECT_DOCUMENTATION.md
