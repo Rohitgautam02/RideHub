@@ -1,8 +1,6 @@
 const Vehicle = require('../models/Vehicle');
 const Shop = require('../models/Shop');
 const Booking = require('../models/Booking');
-const fs = require('fs');
-const path = require('path');
 
 // @desc    Get all vehicles with filters
 // @route   GET /api/vehicles
@@ -138,9 +136,9 @@ exports.createVehicle = async (req, res) => {
     // Add shop to req.body
     req.body.shop = shop._id;
 
-    // Handle image uploads
+    // Handle image uploads from Cloudinary
     if (req.files && req.files.length > 0) {
-      req.body.images = req.files.map(file => `/uploads/${file.filename}`);
+      req.body.images = req.files.map(file => file.path);
     }
 
     const vehicle = await Vehicle.create(req.body);
@@ -199,27 +197,30 @@ exports.updateVehicle = async (req, res) => {
       }
     }
     
-    // Delete images that are being removed
+    // Delete images that are being removed from Cloudinary
+    const cloudinary = require('cloudinary').v2;
     const oldImages = vehicle.images || [];
     const imagesToDelete = oldImages.filter(img => !finalImages.includes(img));
     
-    imagesToDelete.forEach(imagePath => {
+    for (const imageUrl of imagesToDelete) {
       try {
-        const filename = imagePath.replace('/uploads/', '');
-        const fullPath = path.join(__dirname, '..', 'uploads', filename);
+        // Extract public_id from Cloudinary URL
+        // Format: https://res.cloudinary.com/[cloud_name]/image/upload/v[version]/[public_id].[format]
+        const urlParts = imageUrl.split('/');
+        const fileWithExt = urlParts[urlParts.length - 1];
+        const publicId = `ridehub/vehicles/${fileWithExt.split('.')[0]}`;
         
-        if (fs.existsSync(fullPath)) {
-          fs.unlinkSync(fullPath);
-        }
+        await cloudinary.uploader.destroy(publicId);
+        console.log(`Deleted image from Cloudinary: ${publicId}`);
       } catch (error) {
-        console.error(`Failed to delete image: ${imagePath}`, error);
+        console.error(`Failed to delete image from Cloudinary: ${imageUrl}`, error);
         // Continue even if delete fails
       }
-    });
+    }
     
-    // Add new uploaded images
+    // Add new uploaded images from Cloudinary
     if (req.files && req.files.length > 0) {
-      const newImages = req.files.map(file => `/uploads/${file.filename}`);
+      const newImages = req.files.map(file => file.path);
       finalImages = [...finalImages, ...newImages];
     }
     
