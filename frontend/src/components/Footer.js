@@ -28,8 +28,8 @@ const Footer = () => {
   };
 
   const contactNumbers = [
-    { label: 'Customer Support', number: '+91 98765-43210' },
-    { label: 'Business Inquiries', number: '+91 98765-43211' },
+    { label: 'Customer Support', number: '+91 98966-64745' },
+    { label: 'Business Inquiries', number: '+91 98966-64745' },
   ];
 
   return (

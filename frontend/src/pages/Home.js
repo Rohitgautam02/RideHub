@@ -189,7 +189,7 @@ const Home = () => {
                   <FaMapMarkerAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-luxury-gold" />
                   <input
                     type="text"
-                    placeholder="Enter city"
+                    placeholder=" Enter city"
                     value={searchData.city}
                     onChange={(e) => setSearchData({ ...searchData, city: e.target.value })}
                     className="w-full pl-12 pr-4 py-4 bg-luxury-dark border border-luxury-charcoal/50 rounded-2xl focus:ring-2 focus:ring-luxury-gold focus:border-transparent text-white placeholder-gray-500 transition-all"
