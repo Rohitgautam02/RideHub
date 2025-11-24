@@ -98,16 +98,16 @@ MONGO_URI=mongodb://localhost:27017/ridehub
 JWT_SECRET=your_super_secret_jwt_key_change_this
 JWT_EXPIRE=30d
 
-# Cloudinary (optional - for production image uploads)
+# Cloudinary (required for production image uploads)
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
-# Stripe (optional - for real payments)
-STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
-STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
+# Razorpay (optional - for real payments)s)
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_secret
 
-# Payment Mode (stripe or mock)
+# Payment Mode (razorpay or mock)
 PAYMENT_MODE=mock
 ```
 
@@ -117,23 +117,15 @@ PAYMENT_MODE=mock
 mongod
 ```
 
-6. **Seed the database:**
+6. **Seed the database (Optional):**
 ```bash
 npm run seed
 ```
 
 This will create:
-- 6 users (admin, 3 shop owners, 2 customers)
-- 3 shops (Mumbai, Delhi, Bangalore)
-- 15+ vehicles (scooters, bikes, cars)
-
-**Demo Login Credentials:**
-- **Admin:** admin@ridehub.com / admin123
-- **Shop Owner 1:** rajesh@shop.com / shop123
-- **Shop Owner 2:** priya@shop.com / shop123
-- **Shop Owner 3:** amit@shop.com / shop123
-- **Customer 1:** john@customer.com / customer123
-- **Customer 2:** sarah@customer.com / customer123
+- Sample users (admin, shop owners, customers)
+- Demo shops in major cities
+- Sample vehicles across categories
 
 7. **Start the backend server:**
 ```bash
@@ -328,28 +320,28 @@ PAYMENT_MODE=mock
 - No external dependencies
 - Perfect for development
 
-**Stripe Payment:**
+**Razorpay Payment:**
 ```env
-PAYMENT_MODE=stripe
-STRIPE_SECRET_KEY=sk_test_your_key
-STRIPE_PUBLISHABLE_KEY=pk_test_your_key
+PAYMENT_MODE=razorpay
+RAZORPAY_KEY_ID=your_key_id
+RAZORPAY_KEY_SECRET=your_secret
 ```
 - Real payment processing
 - Test mode available
-- Requires Stripe account
+- Indian payment gateway
 
 ### Image Uploads
 
-**Local Storage (Default):**
-- Images stored in `backend/uploads/`
-- Served via Express static middleware
-
-**Cloudinary (Recommended for Production):**
+**Cloudinary (Production - Currently Configured):**
 ```env
-CLOUDINARY_CLOUD_NAME=your_name
-CLOUDINARY_API_KEY=your_key
-CLOUDINARY_API_SECRET=your_secret
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
+- Images stored in cloud
+- Automatic transformations (1200x800)
+- Persistent storage across deployments
+- CDN delivery for fast loading
 
 ### Custom Pricing
 
@@ -376,38 +368,45 @@ Shop owners can set:
 
 ## 🚀 Deployment
 
-### Backend (Heroku/Railway/Render)
-1. Push code to Git
-2. Set environment variables
-3. Connect MongoDB Atlas
-4. Deploy
+### Backend (Render - Currently Deployed)
+1. Push code to GitHub
+2. Connect repository to Render
+3. Set environment variables:
+   - NODE_ENV=production
+   - PORT=5000
+   - MONGO_URI (MongoDB Atlas)
+   - JWT_SECRET
+   - JWT_EXPIRE
+   - CLOUDINARY_CLOUD_NAME
+   - CLOUDINARY_API_KEY
+   - CLOUDINARY_API_SECRET
+   - RAZORPAY_KEY_ID
+   - RAZORPAY_KEY_SECRET
+   - PAYMENT_MODE
+4. Auto-deploy on GitHub push
 
-### Frontend (Vercel/Netlify)
-1. Build: `npm run build`
-2. Set REACT_APP_API_URL to production backend
-3. Deploy build folder
+### Frontend (Vercel - Currently Deployed)
+1. Push code to GitHub
+2. Connect repository to Vercel
+3. Set environment variable:
+   - REACT_APP_API_URL (your Render backend URL)
+4. Auto-deploy on GitHub push
 
 ### Database (MongoDB Atlas)
 1. Create cluster
-2. Whitelist IPs
-3. Update MONGO_URI in backend
+2. Whitelist IPs (0.0.0.0/0 for production)
+3. Create database user
+4. Update MONGO_URI in backend environment variables
 
 ## 🧪 Testing
 
-### Test User Accounts
-```
-Admin:        admin@ridehub.com / admin123
-Shop Owner:   rajesh@shop.com / shop123
-Customer:     john@customer.com / customer123
-```
-
 ### Test Workflow
-1. Login as customer
-2. Browse vehicles in Mumbai
-3. Book a vehicle
+1. Register as a new customer or use seeded data
+2. Browse available vehicles
+3. Book a vehicle with date selection
 4. Complete mock payment
-5. Login as shop owner (rajesh@shop.com)
-6. View booking in dashboard
+5. Login as shop owner
+6. View booking in shop dashboard
 7. Update booking status
 8. Record odometer readings
 
