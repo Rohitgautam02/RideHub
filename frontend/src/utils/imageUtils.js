@@ -48,8 +48,10 @@ export const handleImageError = (e) => {
   e.target.onerror = null; // Prevent infinite loop
 };
 
-export default {
+const imageUtils = {
   getImageUrl,
   getImageUrls,
   handleImageError
 };
+
+export default imageUtils;

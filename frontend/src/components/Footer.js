@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   FaFacebook, FaTwitter, FaInstagram, FaLinkedin,
-  FaPhone, FaEnvelope, FaGooglePlay
+  FaPhone, FaEnvelope
 } from 'react-icons/fa';
 
 const Footer = () => {

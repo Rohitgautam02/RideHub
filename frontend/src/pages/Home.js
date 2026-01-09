@@ -19,6 +19,7 @@ const Home = () => {
     type: '',
   });
 
+  const [statsRef] = useInView({ triggerOnce: true, threshold: 0.3 });
   const [featuredRef, featuredInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   useEffect(() => {

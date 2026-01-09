@@ -24,10 +24,8 @@ const BookingDetail = () => {
 
   const loadBookingDetails = async () => {
     try {
-      const [bookingRes, paymentRes] = await Promise.all([
-        bookingService.getBooking(id),
-        paymentService.getPaymentByBooking(id).catch(() => ({ data: null }))
-      ]);
+      const bookingRes = await bookingService.getBooking(id);
+      const paymentRes = await paymentService.getPaymentByBooking(id).catch(() => ({ data: null }));
       
       setBooking(bookingRes.data);
       setPayment(paymentRes.data);

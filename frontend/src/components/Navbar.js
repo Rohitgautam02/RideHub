@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { FaUser, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
-  const { user, logout, isAuthenticated, isCustomer, isShopOwner } = useAuth();
+  const { user, logout, isAuthenticated, isShopOwner } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);

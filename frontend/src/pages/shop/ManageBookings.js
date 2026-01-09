@@ -4,7 +4,7 @@ import Loading from '../../components/Loading';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';
 import { getImageUrl, handleImageError } from '../../utils/imageUtils';
-import { FaCalendar, FaCar, FaUser, FaRupeeSign, FaEdit } from 'react-icons/fa';
+import { FaCalendar, FaUser, FaRupeeSign, FaEdit } from 'react-icons/fa';
 
 const ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -16,6 +16,7 @@ const ManageBookings = () => {
 
   useEffect(() => {
     loadBookings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterStatus]);
 
   const loadBookings = async () => {

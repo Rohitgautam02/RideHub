@@ -192,7 +192,7 @@ export const getPasswordStrength = (password) => {
   return { strength, label, color, percentage: strength };
 };
 
-export default {
+const validationUtils = {
   validateEmail,
   validatePhone,
   validatePassword,
@@ -204,3 +204,5 @@ export default {
   validateURL,
   getPasswordStrength
 };
+
+export default validationUtils;
