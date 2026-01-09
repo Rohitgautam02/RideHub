@@ -23,6 +23,7 @@ const VehicleDetail = () => {
   useEffect(() => {
     setLoading(true);
     loadVehicle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const loadVehicle = async () => {

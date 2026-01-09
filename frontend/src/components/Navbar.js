@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
-import { FaUser, FaSignOutAlt, FaHome, FaCar, FaStore, FaBars, FaTimes } from 'react-icons/fa';
+import { FaUser, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
   const { user, logout, isAuthenticated, isCustomer, isShopOwner } = useAuth();

@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
-  FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube,
-  FaPhone, FaEnvelope, FaMapMarkerAlt, FaApple, FaGooglePlay
+  FaFacebook, FaTwitter, FaInstagram, FaLinkedin,
+  FaPhone, FaEnvelope, FaGooglePlay
 } from 'react-icons/fa';
 
 const Footer = () => {

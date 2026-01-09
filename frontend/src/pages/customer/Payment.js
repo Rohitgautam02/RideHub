@@ -11,7 +11,7 @@ const Payment = () => {
   const { booking } = location.state || {};
   
   const [loading, setLoading] = useState(false);
-  const [paymentMode, setPaymentMode] = useState('mock');
+  const [paymentMode] = useState('mock');
 
   useEffect(() => {
     if (!booking) {
@@ -40,7 +40,7 @@ const Payment = () => {
         bookingId: booking._id
       });
 
-      const { orderId, amount, currency, keyId, payment } = response.data.data;
+      const { orderId, amount, currency, keyId } = response.data.data;
 
       if (paymentMode === 'mock' || !orderId) {
         // Mock payment - direct success

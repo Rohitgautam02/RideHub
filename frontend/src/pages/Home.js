@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import CountUp from 'react-countup';
 import { vehicleService, shopService } from '../services/api.service';
 import ImageCarousel from '../components/ImageCarousel';
 import Loading from '../components/Loading';
@@ -20,12 +19,12 @@ const Home = () => {
     type: '',
   });
 
-  const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.3 });
   const [featuredRef, featuredInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   useEffect(() => {
     loadFeaturedVehicles();
     loadShops();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadFeaturedVehicles = async () => {
@@ -55,12 +54,7 @@ const Home = () => {
     window.location.href = `/vehicles?${queryParams.toString()}`;
   };
 
-  const stats = [
-    { label: 'Registered Users', value: 100, suffix: '+' },
-    { label: 'Available Vehicles', value: 50, suffix: '+' },
-    { label: 'Cities Served', value: 10, suffix: '+' },
-    { label: 'Partner Shops', value: 20, suffix: '+' },
-  ];
+
 
   const categories = [
     {

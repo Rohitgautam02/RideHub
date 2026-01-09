@@ -28,6 +28,7 @@ const SearchVehicles = () => {
 
   useEffect(() => {
     applyFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, vehicles]);
 
   const loadVehicles = async () => {

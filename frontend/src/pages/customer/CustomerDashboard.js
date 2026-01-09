@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { bookingService, paymentService } from '../../services/api.service';
+import { bookingService } from '../../services/api.service';
 import Loading from '../../components/Loading';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';

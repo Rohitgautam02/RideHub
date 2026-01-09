@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { format } from 'date-fns';
 import { getImageUrl, handleImageError } from '../../utils/imageUtils';
 import { 
-  FaCalendar, FaClock, FaRupeeSign, FaMapMarkerAlt, 
+  FaCalendar, FaMapMarkerAlt, 
   FaPhone, FaEnvelope, FaCar, FaCheckCircle, FaTimesCircle 
 } from 'react-icons/fa';
 
@@ -19,6 +19,7 @@ const BookingDetail = () => {
 
   useEffect(() => {
     loadBookingDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const loadBookingDetails = async () => {
