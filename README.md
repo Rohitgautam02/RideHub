@@ -1,6 +1,6 @@
 # 🚗 RideHub - Premium Indian Vehicle Rental Platform
 
-A complete, production-ready full-stack **luxury vehicle rental platform** built with React, Node.js, Express, MongoDB, and Tailwind CSS. Features a **premium dark theme with gold accents**, inspired by BigBoyToyz and BMW.
+A complete, production-ready full-stack **luxury vehicle rental platform** built with React, Node.js, Express, MongoDB, and Tailwind CSS. 
 
 ## 🎨 NEW: Luxury Redesign
 
