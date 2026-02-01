@@ -51,7 +51,7 @@ const BookingDetail = () => {
 
   const handlePayment = async () => {
     try {
-      const response = await paymentService.createPayment(id);
+      await paymentService.createPayment(id);
       toast.success('Payment initiated successfully');
       // Here you would integrate with actual payment gateway
       // For now, just reload the page
